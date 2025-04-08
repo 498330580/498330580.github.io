@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>组网服务Netbird | 瑶玲之家</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.yaoling.cc/favicon.ico?v=1744077481223">
+<link rel="stylesheet" href="https://blog.yaoling.cc/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="简介
+NetBird 是一个开源的 Zero Trust 网络平台，允许您为您的 组织或家庭。我们将 NetBird 设计为简单快速，几乎不需要任何配置工作，并且只需 在打开端口的麻烦、复杂的防火墙规则、VPN 网关等的背后。
+
+
+NetB..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.yaoling.cc">
+        <img src="https://blog.yaoling.cc/images/avatar.png?v=1744077481223" class="site-logo">
+        <h1 class="site-title">瑶玲之家</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      一个个人记录网站
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/498330580" target="_blank">498330580</a> | <a class="rss" href="https://blog.yaoling.cc/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">组网服务Netbird</h2>
+            <div class="post-date">2025-04-08</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="简介">简介</h1>
+<p>NetBird 是一个开源的 Zero Trust 网络平台，允许您为您的 组织或家庭。我们将 NetBird 设计为简单快速，几乎不需要任何配置工作，并且只需 在打开端口的麻烦、复杂的防火墙规则、VPN 网关等的背后。</p>
+<!-- more -->
+<blockquote>
+<p>NetBird 是一个**<a href="https://github.com/netbirdio/netbird">开源</a>**项目，可以自托管。 <a href="https://docs.netbird.io/selfhosted/self-hosted-vs-cloud-netbird">在此处</a>查看自托管版本和云托管版本之间的比较。</p>
+</blockquote>
+<p>NetBird 没有集中式 VPN 服务器 - 您的计算机、设备、机器和服务器直接通过快速加密隧道相互连接。 它创建了一个高性能的点对点 <a href="https://www.wireguard.com/">WireGuard®</a> 覆盖网络，只需单击几下即可连接在任何地方运行的计算机。<br>
+使用 NetBird 部署安全的点对点 VPN 实际上只需不到 5 分钟。</p>
+<p>官方网站：<a href="https://netbird.io/">NetBird - Open-Source Zero Trust Networking</a>  文档：<a href="https://docs.netbird.io/">Introduction to NetBird - NetBird Docs</a></p>
+<h1 id="安装前准备">安装前准备</h1>
+<h2 id="一-环境配置">一、环境配置</h2>
+<p>我们推荐按照 Docker 官方文档安装 Docker 和 Docker Compose，因为部分 Linux 发行版软件仓库中的 Docker 版本可能过旧。</p>
+<p><a href="https://docs.docker.com/install/">Docker 安装文档</a><br>
+<a href="https://docs.docker.com/compose/install/">Docker Compose 安装文档</a></p>
+<h2 id="二-要求">二、要求</h2>
+<p><strong>基础设施要求：</strong></p>
+<ul>
+<li>至少具有 <strong>1 个 CPU</strong> 和 <strong>2 GB</strong> 内存的 Linux VM。</li>
+<li>VM 应在 TCP 端口 <strong>80</strong>、<strong>443</strong>、<strong>33073</strong>、<strong>10000</strong> 和 <strong>33080</strong> 上公开访问;和 UDP 端口：<strong>3478</strong>、<strong>49152-65535</strong>。</li>
+<li>指向 VM 的<strong>公共域名</strong>。</li>
+</ul>
+<p><strong>软件要求：</strong></p>
+<ul>
+<li>使用 docker compose 插件（<a href="https://docs.docker.com/engine/install/">Docker 安装指南</a>）安装在 VM 上的 Docker，或使用版本 2 或更高版本的 docker-compose 安装在 VM 上的 Docker。</li>
+<li><a href="https://jqlang.github.io/jq/">JQ</a> 已安装。在大多数发行版中 通常位于官方仓库中，根据系统执行<code>sudo apt install jq</code>或<code>sudo yum install jq</code>安装</li>
+<li><a href="https://curl.se/">curl</a> 已安装。 通常位于官方仓库中，根据系统执行<code>sudo apt install curl</code>或<code>sudo yum install curl</code>安装</li>
+</ul>
+<h2 id="三-创建安装目录">三、创建安装目录</h2>
+<p>执行以下命令：</p>
+<pre><code class="language-shell">cd ~
+mkdir netbird &amp;&amp; cd netbird
+</code></pre>
+<h1 id="快速安装">快速安装</h1>
+<blockquote>
+<p>适用于本机没有占用80、443端口的服务器，如果自己配置有反向代理服务，请使用自定义安装服务</p>
+</blockquote>
+<h2 id="一-下载并运行脚本">一、下载并运行脚本</h2>
+<p>下载并运行安装脚本，只需一行：</p>
+<pre><code class="language-bash">export NETBIRD_DOMAIN=netbird.example.com; curl -fsSL https://github.com/netbirdio/netbird/releases/latest/download/getting-started-with-zitadel.sh | bash
+</code></pre>
+<p>如果您想在运行脚本之前检查脚本，您可以下载它并在本地运行它：</p>
+<pre><code class="language-bash">curl -sSLO https://github.com/netbirdio/netbird/releases/latest/download/getting-started-with-zitadel.sh
+# check the script
+cat getting-started-with-zitadel.sh
+# run the script
+export NETBIRD_DOMAIN=netbird.example.com
+bash getting-started-with-zitadel.sh
+</code></pre>
+<p>替换为您的域名。<code>netbird.example.com</code></p>
+<p>脚本执行完成后，您可以使用终端中显示的凭据通过 URL 访问您的 netbird 实例。<code>https://netbird.example.com</code></p>
+<h2 id="二-添加用户">二、添加用户</h2>
+<p>如果要添加其他用户，您可以使用相同的凭据通过 URL 访问 Zitadel 的管理控制台。按照 Zitadel 的<a href="https://zitadel.com/docs/guides/manage/console/users">用户指南</a>添加其他本地用户，或按照<a href="https://zitadel.com/docs/guides/integrate/identity-providers">指南配置身份提供商</a>将 Zitadel 与您现有的身份提供商集成。<code>https://netbird.example.com/ui/console</code></p>
+<h2 id="三-备份">三、备份</h2>
+<p>要备份 NetBird 安装，您需要复制配置文件、管理服务数据库和 Zitadel 的数据库。<br>
+配置文件位于运行安装脚本的文件夹中。要备份，请将文件复制到备份位置：</p>
+<pre><code class="language-bash">mkdir backup
+cp docker-compose.yml Caddyfile zitadel.env dashboard.env turnserver.conf management.json relay.env zdb.env backup/
+</code></pre>
+<p>要保存管理服务数据库，您需要停止管理服务并使用 docker compose 命令从存储目录中复制文件，如下所示：</p>
+<pre><code class="language-bash">docker compose stop management
+docker compose cp -a management:/var/lib/netbird/ backup/
+docker compose start management
+</code></pre>
+<p>您可以按照 <a href="https://www.cockroachlabs.com/docs/stable/backup">Cockroach 备份指南</a>备份 Zitadel 的数据库，其中包含用户信息。</p>
+<h2 id="四-升级">四、升级</h2>
+<p>使用版本 &lt; <a href="https://github.com/netbirdio/netbird/releases/tag/v0.15.3">v0.15.3</a> 的用户应首先将他们的系统升级到 <a href="https://github.com/netbirdio/netbird/releases/tag/v0.25.9">v0.25.9</a>。 运行 Management 以将规则正确迁移到策略，然后升级到 <strong>0.26.0+</strong>。<br>
+要将 NetBird 升级到最新版本，您需要查看<a href="https://github.com/netbirdio/netbird/releases">发行说明</a>以了解任何重大更改，并按照以下升级步骤作：</p>
+<ol>
+<li>
+<p>运行 <a href="https://docs.netbird.io/selfhosted/selfhosted-quickstart#backup">backup</a> 部分中描述的备份步骤。</p>
+</li>
+<li>
+<p>拉取最新的 NetBird docker 镜像：</p>
+<pre><code class="language-bash">docker compose pull management dashboard signal relay
+</code></pre>
+</li>
+<li>
+<p>使用新映像重新启动 NetBird 容器：</p>
+<pre><code class="language-bash">docker compose up -d --force-recreate management dashboard signal relay
+</code></pre>
+</li>
+</ol>
+<h2 id="五-删除">五、删除</h2>
+<p>要从服务器中删除 NetBird 安装和所有相关数据，请从安装 NetBird 的文件夹中运行以下命令：</p>
+<pre><code class="language-bash"># remove all NetBird-related containers and volumes (data)
+docker compose down --volumes
+# remove downloaded and generated config files
+rm -f docker-compose.yml Caddyfile zitadel.env dashboard.env machinekey/zitadel-admin-sa.token turnserver.conf management.json
+</code></pre>
+<h1 id="自定义安装">自定义安装</h1>
+<h2 id="一-部署authentik-idp">一、部署Authentik IDP</h2>
+<blockquote>
+<p>NetBird 支持通用 OpenID （OIDC） 协议，允许与遵循规范的任何 IDP 集成。<br>
+NetBird 的管理服务与一些最流行的 IDP API 集成，允许该服务缓存和显示用户名和电子邮件地址，而无需存储敏感数据。</p>
+</blockquote>
+<h3 id="1-新建目录并下载官方的docker-compose">1. 新建目录，并下载官方的docker-compose</h3>
+<pre><code class="language-shell">cd ~ &amp;&amp; mkdir authentik &amp;&amp; cd authentik &amp;&amp; wget https://goauthentik.io/docker-compose.yml
+</code></pre>
+<h3 id="2-安装一个生成随机密码的小工具">2. 安装一个生成随机密码的小工具</h3>
+<pre><code class="language-shell">apt -y install pwgen
+</code></pre>
+<h3 id="3-生成密码和密匙到env文件">3. 生成密码和密匙到.env文件</h3>
+<pre><code class="language-shell">echo &quot;PG_PASS=$(pwgen -s 40 1)&quot; &gt;&gt; .env
+echo &quot;AUTHENTIK_SECRET_KEY=$(pwgen -s 50 1)&quot; &gt;&gt; .env
+</code></pre>
+<h3 id="4-启动服务">4. 启动服务</h3>
+<pre><code class="language-shell">docker compose up -d
+</code></pre>
+<h3 id="5-反向代理服务">5. 反向代理服务</h3>
+<h4 id="1-先在域名服务商配置你要代理的域名dns到你的服务器">(1) 先在域名服务商配置你要代理的域名DNS到你的服务器</h4>
+<h4 id="2-配置反向代理服务">(2) 配置反向代理服务</h4>
+<blockquote>
+<p>我这里使用的是NPM，NPM的安装参考我另一篇教程 <a href="Nginx%20Proxy%20Manager%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85.md">Nginx Proxy Manager反向代理工具安装</a></p>
+</blockquote>
+<p><strong>由于官方的docker-compose是对外服务的端口是<code>9000(http)</code>和<code>9443(https)</code>我们在代理的时候就是代理这两个端口，如果我们没有给服务配置ssl证书，那就是直接带了<code>9000</code>端口</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743561740339-PixPin_2025-04-02_10-38-15.png" alt="PixPin_2025-04-02_10-38-15.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743561745757-PixPin_2025-04-02_10-39-11.png" alt="PixPin_2025-04-02_10-39-11.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743561755593-PixPin_2025-04-02_10-40-09.png" alt="PixPin_2025-04-02_10-40-09.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743561759743-PixPin_2025-04-02_10-41-21.png" alt="PixPin_2025-04-02_10-41-21.png" loading="lazy"></figure>
+<h4 id="3-配置authentik-idp">(3) 配置Authentik IDP</h4>
+<p><strong>👉 先访问：https://你的域名/if/flow/initial-setup/，配置默认的管理员账号和密码。</strong></p>
+<p><strong>👉 按照官方文档进行配置：<a href="https://docs.netbird.io/selfhosted/identity-providers#authentik">身份提供商 - NetBird Docs</a>，这里我就不重复这些步骤了。务必记下Client ID、Username、Password，后续配置Netbird需要用到。</strong></p>
+<p><strong>❗️ 如果你完全按照官方的文档配置，那么Username就是：Netbird（注意大小写）</strong><br>
+<strong>❗️ Password是服务账户的密码，不是Authentik管理员账户的密码。</strong></p>
+<h5 id="第-1-步创建-oauth2openid-提供者">第 1 步：创建 OAuth2/OpenID 提供者</h5>
+<figure data-type="image" tabindex="5"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563789766-PixPin_2025-04-02_10-57-20.png" alt="PixPin_2025-04-02_10-57-20.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563797363-PixPin_2025-04-02_10-58-00.png" alt="PixPin_2025-04-02_10-58-00.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563804869-PixPin_2025-04-02_11-01-13.png" alt="PixPin_2025-04-02_11-01-13.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563815513-PixPin_2025-04-02_11-07-59.png" alt="PixPin_2025-04-02_11-07-59.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563836393-PixPin_2025-04-02_11-14-59.png" alt="PixPin_2025-04-02_11-14-59.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563849014-PixPin_2025-04-02_11-09-01.png" alt="PixPin_2025-04-02_11-09-01.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563855904-PixPin_2025-04-02_11-10-54.png" alt="PixPin_2025-04-02_11-10-54.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743563864851-PixPin_2025-04-02_11-11-35.png" alt="PixPin_2025-04-02_11-11-35.png" loading="lazy"></figure>
+<h5 id="步骤-2创建外部应用程序">步骤 2：创建外部应用程序</h5>
+<figure data-type="image" tabindex="13"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743564107426-PixPin_2025-04-02_11-18-55.png" alt="PixPin_2025-04-02_11-18-55.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743564115807-PixPin_2025-04-02_11-21-28.png" alt="PixPin_2025-04-02_11-21-28.png" loading="lazy"></figure>
+<h5 id="第-3-步创建服务帐户">第 3 步：创建服务帐户</h5>
+<figure data-type="image" tabindex="15"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743566985962-PixPin_2025-04-02_11-26-20.png" alt="PixPin_2025-04-02_11-26-20.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743566995127-PixPin_2025-04-02_11-30-22.png" alt="PixPin_2025-04-02_11-30-22.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743567001362-PixPin_2025-04-02_11-39-40.png" alt="PixPin_2025-04-02_11-39-40.png" loading="lazy"></figure>
+<h5 id="第-4-步将服务账户添加到管理员组">第 4 步：将服务账户添加到管理员组</h5>
+<figure data-type="image" tabindex="18"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743583472333-PixPin_2025-04-02_16-40-41.png" alt="PixPin_2025-04-02_16-40-41.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743583493386-PixPin_2025-04-02_16-41-51.png" alt="PixPin_2025-04-02_16-41-51.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743583506550-PixPin_2025-04-02_16-42-34.png" alt="PixPin_2025-04-02_16-42-34.png" loading="lazy"></figure>
+<h5 id="第-5-步创建用于设备令牌身份验证的身份验证流程">第 5 步：创建用于设备令牌身份验证的身份验证流程</h5>
+<figure data-type="image" tabindex="21"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743584162245-PixPin_2025-04-02_16-46-37.png" alt="PixPin_2025-04-02_16-46-37.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="22"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743584174577-PixPin_2025-04-02_16-50-27.png" alt="PixPin_2025-04-02_16-50-27.png" loading="lazy"></figure>
+<p>然后回到菜单选择</p>
+<figure data-type="image" tabindex="23"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743584235159-PixPin_2025-04-02_16-51-30.png" alt="PixPin_2025-04-02_16-51-30.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="24"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743584289982-PixPin_2025-04-02_16-53-02.png" alt="PixPin_2025-04-02_16-53-02.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="25"><img src="https://r2-oss.yaoling.cc/image/2025/04/02/piclist-1743584299303-PixPin_2025-04-02_16-54-24.png" alt="PixPin_2025-04-02_16-54-24.png" loading="lazy"></figure>
+<p><strong>务必做好上述这些配置，否则后续Netbird客户端将无法通过URL的方式鉴权。</strong></p>
+<h2 id="二-安装netbird">二、安装netbird</h2>
+<h3 id="1创建拉取脚本并拉取最新代码">1.创建拉取脚本，并拉取最新代码</h3>
+<h4 id="第一步-先创建netbird目录">第一步、先创建<code>netbird</code>目录</h4>
+<pre><code class="language-shell">cd ~ &amp;&amp; mkdir netbird &amp;&amp; cd netbird
+</code></pre>
+<h4 id="第二步-执行nano-startsh然后输入以下内容">第二步、执行<code>nano start.sh</code>，然后输入以下内容：</h4>
+<pre><code class="language-bash">#!/bin/bash
+REPO=&quot;https://github.com/netbirdio/netbird/&quot;
+# this command will fetch the latest release e.g. v0.8.7
+LATEST_TAG=$(basename $(curl -fs -o/dev/null -w %{redirect_url} ${REPO}releases/latest))
+echo $LATEST_TAG
+
+# this command will clone the latest tag
+git clone --depth 1 --branch $LATEST_TAG $REPO
+</code></pre>
+<p>按<code>Ctrl+X</code>输入<code>y</code>最后回车保存<code>start.sh</code>文件</p>
+<p>执行<code>chmod +x start.sh</code>赋予文件执行权限，之后运行<code>start.sh</code>脚本以获取最新版本并克隆代码</p>
+<h3 id="2-配置netbird">2. 配置netbird</h3>
+<h4 id="步骤1进入配置目录">步骤1：进入配置目录</h4>
+<pre><code class="language-shell">cd netbird/infrastructure_files/
+</code></pre>
+<h4 id="步骤2准备配置文件">步骤2：准备配置文件</h4>
+<pre><code class="language-shell"># 复制配置模板
+cp setup.env.example setup.env
+# 编辑配置
+nano setup.env
+</code></pre>
+<p><strong>需要修改的内容如下：</strong></p>
+<pre><code class="language-env"># 这里填写你的netbird域名
+NETBIRD_DOMAIN=&quot;&quot;
+
+
+# 这里填写你的authentik认证服务的地址 &quot;https://你的服务域名/application/o/netbird/.well-known/openid-configuration&quot;
+NETBIRD_AUTH_OIDC_CONFIGURATION_ENDPOINT=&quot;https://你的服务域名/application/o/netbird/.well-known/openid-configuration&quot;
+
+# 这里填写你的authentik得到的客户端ID
+NETBIRD_AUTH_AUDIENCE=&quot;&quot;
+NETBIRD_AUTH_CLIENT_ID=&quot;&quot;
+NETBIRD_AUTH_DEVICE_AUTH_CLIENT_ID=&quot;&quot;
+NETBIRD_AUTH_DEVICE_AUTH_AUDIENCE=&quot;&quot;
+NETBIRD_IDP_MGMT_CLIENT_ID=&quot;&quot;
+
+# 这一项这样修改
+NETBIRD_AUTH_SUPPORTED_SCOPES=&quot;openid profile email offline_access api&quot;
+
+# 这里填写authentik
+NETBIRD_MGMT_IDP=&quot;authentik&quot;
+
+# 修改这里的为true
+NETBIRD_DISABLE_LETSENCRYPT=true
+
+# 添加如下内容
+# 这个直接填写Netbird
+NETBIRD_IDP_MGMT_EXTRA_USERNAME=&quot;Netbird&quot;
+# 这里填写你之前配置Authentik时得到的服务账户密码
+NETBIRD_IDP_MGMT_EXTRA_PASSWORD=&quot;Service Account Password&quot;
+
+# 修改默认端口
+NETBIRD_MGMT_API_PORT=8012
+NETBIRD_SIGNAL_PORT=10000
+
+</code></pre>
+<p><strong>参考的是如下图这个<a href="https://docs.netbird.io/selfhosted/identity-providers#authentik">官方文档</a>：</strong></p>
+<figure data-type="image" tabindex="26"><img src="https://r2-oss.yaoling.cc/image/2025/04/03/piclist-1743678611132-PixPin_2025-04-03_19-07-38.png" alt="PixPin_2025-04-03_19-07-38.png" loading="lazy"></figure>
+<p><strong>修改完成后记得<code>ctrl+x</code> 然后输入<code>y</code> 最后回车保存</strong></p>
+<h4 id="步骤3可选禁用单账户模式">步骤3（可选)：禁用单账户模式</h4>
+<p><strong>修改<code>docker-compose.yml.tmpl</code>文件</strong></p>
+<pre><code class="language-shell">nano docker-compose.yml.tmpl
+</code></pre>
+<p><strong>然后在<code>management</code>中添加<code>--disable-single-account-mode</code>这条启动命令</strong></p>
+<figure data-type="image" tabindex="27"><img src="https://r2-oss.yaoling.cc/image/2025/04/03/piclist-1743679898341-PixPin_2025-04-03_19-29-33.png" alt="PixPin_2025-04-03_19-29-33.png" loading="lazy"></figure>
+<p><strong>最后保存并退出</strong></p>
+<h4 id="步骤4生成配置文件">步骤4：生成配置文件</h4>
+<p><strong>执行官方提供的配置脚本来生成相应的配置文件：</strong></p>
+<pre><code class="language-shell">./configure.sh
+</code></pre>
+<h4 id="步骤5运行docker-compose">步骤5：运行docker compose</h4>
+<p><strong>完成后转到artifacts目录</strong></p>
+<pre><code class="language-shell">cd artifacts
+</code></pre>
+<p><em>里面应该有这4个文件：docker-compose.yml、management.json、openid-configuration.json、turnserver.conf</em></p>
+<p><strong>👉由于官方的这个脚本有点问题，我们还需要修改一些配置才能使其正常工作，首先编辑management.json：</strong></p>
+<pre><code class="language-shell">nano management.json
+</code></pre>
+<p>默认的信号服务的端口为10000：</p>
+<pre><code class="language-json">&quot;Signal&quot;: {
+        &quot;Proto&quot;: &quot;https&quot;,
+        &quot;URI&quot;: &quot;nb.example.com:10000&quot;,
+        &quot;Username&quot;: &quot;&quot;,
+        &quot;Password&quot;: &quot;&quot;
+    },
+</code></pre>
+<p>需要将其改为443端口，因为我们后续会配置使用Nginx反向代理信号服务：</p>
+<pre><code class="language-shell">&quot;Signal&quot;: {
+        &quot;Proto&quot;: &quot;https&quot;,
+        &quot;URI&quot;: &quot;nb.example.com:443&quot;,
+        &quot;Username&quot;: &quot;&quot;,
+        &quot;Password&quot;: &quot;&quot;
+    },
+</code></pre>
+<p><strong>👉还需要修改compose文件：</strong></p>
+<pre><code class="language-shell">nano docker-compose.yml
+</code></pre>
+<p>官方的脚本没有帮我们处理dashboard容器的端口，由于我们后续会配置使用Nginx反向代理，所以将这里的443端口注释掉，容器外的80端口改为8011：</p>
+<pre><code class="language-yaml">services:
+  #UI dashboard
+  dashboard:
+    image: netbirdio/dashboard:latest
+    restart: unless-stopped
+    ports:
+      - 8011:80
+#      - 443:443
+</code></pre>
+<p><strong>👉另外dashboard容器的环境变量也需要做修改，默认情况下会把Endpoints相关的环境变量配置为Domain:8012的形式：</strong></p>
+<pre><code class="language-yaml">services:
+  #UI dashboard
+  dashboard:
+    image: netbirdio/dashboard:latest
+    ...
+    environment:
+      # Endpoints
+      - NETBIRD_MGMT_API_ENDPOINT=https://nb.example.com:8012
+      - NETBIRD_MGMT_GRPC_API_ENDPOINT=https://nb.example.com:8012
+    ...
+</code></pre>
+<p>需要将其修改为：</p>
+<pre><code class="language-yaml">services:
+  #UI dashboard
+  dashboard:
+    image: netbirdio/dashboard:latest
+    ...
+    environment:
+      # Endpoints
+      - NETBIRD_MGMT_API_ENDPOINT=https://nb.example.com
+      - NETBIRD_MGMT_GRPC_API_ENDPOINT=https://nb.example.com
+</code></pre>
+<p><strong>👉启用signal容器的日志，方便后续维护和调试</strong></p>
+<pre><code class="language-yaml">...
+  signal:
+    image: netbirdio/signal:latest
+    restart: unless-stopped
+...
+    command: [ &quot;--log-file&quot;, &quot;console&quot;]
+</code></pre>
+<p><strong>👉执行如下命令启动容器</strong></p>
+<pre><code class="language-shell">docker compose up -d
+</code></pre>
+<h4 id="步骤6配置nginx反向代理netbird">步骤6：配置Nginx反向代理Netbird</h4>
+<p><strong>启动Netbird成功后，现在需要反代Netbird的8011、8012、10000端口，Nginx站点配置文件如下：</strong></p>
+<pre><code class="language-conf">upstream dashboard {
+    server 127.0.0.1:8011;
+    keepalive 10;
+}
+upstream signal {
+    server 127.0.0.1:10000;
+}
+upstream management {
+    server 127.0.0.1:8012;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name nb.example.com;
+
+    client_header_timeout 1d;
+    client_body_timeout 1d;
+
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header        X-Scheme $scheme;
+    proxy_set_header        X-Forwarded-Proto https;
+    proxy_set_header        X-Forwarded-Host $host;
+    grpc_set_header         X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    # Proxy dashboard
+    location / {
+        proxy_pass http://dashboard;
+    }
+    # Proxy Signal
+    location /signalexchange.SignalExchange/ {
+        grpc_pass grpc://signal;
+        #grpc_ssl_verify off;
+        grpc_read_timeout 1d;
+        grpc_send_timeout 1d;
+        grpc_socket_keepalive on;
+    }
+    # Proxy Management http endpoint
+    location /api {
+        proxy_pass http://management;
+    }
+    # Proxy Management grpc endpoint
+    location /management.ManagementService/ {
+        grpc_pass grpc://management;
+        #grpc_ssl_verify off;
+        grpc_read_timeout 1d;
+        grpc_send_timeout 1d;
+        grpc_socket_keepalive on;
+    }
+}
+</code></pre>
+<p><strong>按照文件配置反向代理，然后Netbird服务端就全部部署完毕了。</strong></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.yaoling.cc/post/Q7q_1R-Aui/">
+                  <h3 class="post-title">
+                    Nginx Proxy Manager反向代理工具安装
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
